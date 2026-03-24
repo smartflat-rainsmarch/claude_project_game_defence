@@ -9,7 +9,6 @@ namespace LastLineDefense.Game
         public static IAPManager Instance { get; private set; }
 
         public event Action<string> OnPurchaseComplete;
-        public event Action<string> OnPurchaseFailed;
 
         private SaveManager saveManager;
 
