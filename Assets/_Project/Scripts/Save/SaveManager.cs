@@ -23,24 +23,43 @@ namespace LastLineDefense.Save
         public void Save()
         {
             if (currentData == null) return;
-            string json = JsonUtility.ToJson(currentData);
-            PlayerPrefs.SetString(SaveKey, json);
-            PlayerPrefs.Save();
-            Debug.Log("[SaveManager] Data saved");
+
+            try
+            {
+                string json = JsonUtility.ToJson(currentData);
+                PlayerPrefs.SetString(SaveKey, json);
+                PlayerPrefs.Save();
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError($"[SaveManager] Save failed: {ex.Message}");
+            }
         }
 
         public void Load()
         {
-            if (PlayerPrefs.HasKey(SaveKey))
+            try
             {
-                string json = PlayerPrefs.GetString(SaveKey);
-                currentData = JsonUtility.FromJson<SaveData>(json);
-                Debug.Log("[SaveManager] Data loaded");
+                if (PlayerPrefs.HasKey(SaveKey))
+                {
+                    string json = PlayerPrefs.GetString(SaveKey);
+                    currentData = JsonUtility.FromJson<SaveData>(json);
+
+                    if (currentData == null)
+                    {
+                        Debug.LogWarning("[SaveManager] Corrupted save data, resetting to default");
+                        currentData = SaveData.CreateDefault();
+                    }
+                }
+                else
+                {
+                    currentData = SaveData.CreateDefault();
+                }
             }
-            else
+            catch (System.Exception ex)
             {
+                Debug.LogError($"[SaveManager] Load failed: {ex.Message}");
                 currentData = SaveData.CreateDefault();
-                Debug.Log("[SaveManager] No save found, created default");
             }
         }
 
@@ -48,17 +67,18 @@ namespace LastLineDefense.Save
         {
             currentData = SaveData.CreateDefault();
             Save();
-            Debug.Log("[SaveManager] Data reset");
         }
 
         public void AddCoins(int amount)
         {
+            if (currentData == null) return;
             currentData.totalCoins += amount;
             Save();
         }
 
         public void SetHighestStage(int stage)
         {
+            if (currentData == null) return;
             if (stage > currentData.highestClearedStage)
             {
                 currentData.highestClearedStage = stage;

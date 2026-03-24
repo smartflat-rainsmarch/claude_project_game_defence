@@ -63,7 +63,12 @@ namespace LastLineDefense.UI
         {
             if (rewardManager == null) return;
 
-            var adService = FindFirstObjectByType<Ads.DummyAdService>() as Ads.IAdService;
+            var adServiceObj = FindFirstObjectByType<MonoBehaviour>();
+            Ads.IAdService adService = null;
+            foreach (var mb in FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None))
+            {
+                if (mb is Ads.IAdService svc) { adService = svc; break; }
+            }
             if (adService != null && adService.CanShowRewarded())
             {
                 adService.ShowRewarded(() =>

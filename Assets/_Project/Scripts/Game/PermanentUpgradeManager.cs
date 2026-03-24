@@ -17,15 +17,15 @@ namespace LastLineDefense.Game
 
         public int GetLevel(int upgradeIndex)
         {
-            if (saveManager == null) return 0;
+            if (saveManager == null || upgradeIndex < 0) return 0;
             var data = saveManager.GetSaveData();
-            if (data.upgradeLevels == null || upgradeIndex >= data.upgradeLevels.Length) return 0;
+            if (data?.upgradeLevels == null || upgradeIndex >= data.upgradeLevels.Length) return 0;
             return data.upgradeLevels[upgradeIndex];
         }
 
         public bool CanUpgrade(int upgradeIndex)
         {
-            if (allUpgrades == null || upgradeIndex >= allUpgrades.Length) return false;
+            if (allUpgrades == null || upgradeIndex < 0 || upgradeIndex >= allUpgrades.Length) return false;
 
             var upgrade = allUpgrades[upgradeIndex];
             int currentLevel = GetLevel(upgradeIndex);

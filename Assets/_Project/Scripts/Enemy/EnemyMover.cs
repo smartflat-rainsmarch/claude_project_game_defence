@@ -7,10 +7,18 @@ namespace LastLineDefense.Enemy
     {
         [SerializeField] private float moveSpeed = 2f;
 
+        private float baseSpeed;
         private Transform[] waypoints;
         private int currentWaypointIndex;
 
         public event Action OnReachedEnd;
+        public float CurrentSpeed => moveSpeed;
+        public float BaseSpeed => baseSpeed;
+
+        private void Awake()
+        {
+            baseSpeed = moveSpeed;
+        }
 
         public void SetWaypoints(Transform[] points)
         {

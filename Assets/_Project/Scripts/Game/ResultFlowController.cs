@@ -57,7 +57,9 @@ namespace LastLineDefense.Game
         private void HandleFailed()
         {
             isCleared = false;
-            int failReward = Mathf.RoundToInt(baseReward * 0.3f);
+            var stageManager = FindFirstObjectByType<StageManager>();
+            int clearRewardBase = stageManager != null ? stageManager.ClearReward : 60;
+            int failReward = Mathf.RoundToInt(clearRewardBase * 0.3f);
             baseReward = failReward;
 
             if (resultUI != null)

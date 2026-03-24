@@ -46,7 +46,10 @@ namespace LastLineDefense.Game
                 tutorialPanel.SetActive(true);
 
             if (nextButton != null)
+            {
+                nextButton.onClick.RemoveAllListeners();
                 nextButton.onClick.AddListener(NextStep);
+            }
 
             ShowStep();
         }

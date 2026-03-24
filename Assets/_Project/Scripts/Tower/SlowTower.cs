@@ -46,7 +46,7 @@ namespace LastLineDefense.Tower
         {
             if (mover == null) yield break;
 
-            float originalSpeed = 2f;
+            float originalSpeed = mover.BaseSpeed;
             mover.SetSpeed(originalSpeed * (1f - slowPercent));
 
             yield return new WaitForSeconds(slowDuration);
