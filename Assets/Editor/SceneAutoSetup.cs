@@ -392,7 +392,7 @@ namespace LastLineDefense.Editor
 
         private static void ClearScene()
         {
-            var allObjects = Object.FindObjectsByType<GameObject>(FindObjectsSortMode.None);
+            var allObjects = Object.FindObjectsByType<GameObject>();
             foreach (var obj in allObjects)
             {
                 if (obj != null)

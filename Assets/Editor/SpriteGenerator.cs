@@ -96,7 +96,7 @@ namespace LastLineDefense.Editor
             var scene = UnityEditor.SceneManagement.EditorSceneManager.OpenScene(
                 "Assets/_Project/Scenes/Stage.unity");
 
-            var slots = Object.FindObjectsByType<Tower.TowerSlot>(FindObjectsSortMode.None);
+            var slots = Object.FindObjectsByType<Tower.TowerSlot>();
             foreach (var slot in slots)
             {
                 var sr = slot.GetComponent<SpriteRenderer>();
