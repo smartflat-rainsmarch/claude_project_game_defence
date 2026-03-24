@@ -38,14 +38,14 @@ namespace LastLineDefense.Game
         private void HandleCleared()
         {
             isCleared = true;
-            var stageManager = FindFirstObjectByType<StageManager>();
+            var stageManager = FindAnyObjectByType<StageManager>();
             baseReward = stageManager != null ? stageManager.ClearReward : 60;
             adRewardClaimed = false;
 
             if (resultUI != null)
                 resultUI.ShowResult(true, baseReward);
 
-            var saveManager = FindFirstObjectByType<SaveManager>();
+            var saveManager = FindAnyObjectByType<SaveManager>();
             if (saveManager != null)
             {
                 saveManager.AddCoins(baseReward);
@@ -57,7 +57,7 @@ namespace LastLineDefense.Game
         private void HandleFailed()
         {
             isCleared = false;
-            var stageManager = FindFirstObjectByType<StageManager>();
+            var stageManager = FindAnyObjectByType<StageManager>();
             int clearRewardBase = stageManager != null ? stageManager.ClearReward : 60;
             int failReward = Mathf.RoundToInt(clearRewardBase * 0.3f);
             baseReward = failReward;
@@ -65,7 +65,7 @@ namespace LastLineDefense.Game
             if (resultUI != null)
                 resultUI.ShowResult(false, failReward);
 
-            var saveManager = FindFirstObjectByType<SaveManager>();
+            var saveManager = FindAnyObjectByType<SaveManager>();
             if (saveManager != null && failReward > 0)
                 saveManager.AddCoins(failReward);
         }
@@ -81,7 +81,7 @@ namespace LastLineDefense.Game
                     adRewardClaimed = true;
                     int bonusReward = baseReward;
 
-                    var saveManager = FindFirstObjectByType<SaveManager>();
+                    var saveManager = FindAnyObjectByType<SaveManager>();
                     if (saveManager != null)
                         saveManager.AddCoins(bonusReward);
 

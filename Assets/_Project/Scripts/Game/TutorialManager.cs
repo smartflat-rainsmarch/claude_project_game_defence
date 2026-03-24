@@ -26,7 +26,7 @@ namespace LastLineDefense.Game
 
         private void Start()
         {
-            var saveManager = FindFirstObjectByType<SaveManager>();
+            var saveManager = FindAnyObjectByType<SaveManager>();
             if (saveManager != null && saveManager.GetSaveData().tutorialCompleted)
             {
                 if (tutorialPanel != null)
@@ -79,7 +79,7 @@ namespace LastLineDefense.Game
             if (tutorialPanel != null)
                 tutorialPanel.SetActive(false);
 
-            var saveManager = FindFirstObjectByType<SaveManager>();
+            var saveManager = FindAnyObjectByType<SaveManager>();
             if (saveManager != null)
             {
                 var data = saveManager.GetSaveData();

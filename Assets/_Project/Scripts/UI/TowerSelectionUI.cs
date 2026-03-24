@@ -24,7 +24,7 @@ namespace LastLineDefense.UI
 
         private void RefreshButtons()
         {
-            var currency = FindFirstObjectByType<Game.CurrencyManager>();
+            var currency = FindAnyObjectByType<Game.CurrencyManager>();
 
             for (int i = 0; i < towerButtons.Length; i++)
             {

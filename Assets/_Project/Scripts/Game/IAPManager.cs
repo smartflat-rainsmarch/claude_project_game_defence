@@ -21,7 +21,7 @@ namespace LastLineDefense.Game
                 return;
             }
             Instance = this;
-            saveManager = FindFirstObjectByType<SaveManager>();
+            saveManager = FindAnyObjectByType<SaveManager>();
         }
 
         public void PurchaseRemoveAds()

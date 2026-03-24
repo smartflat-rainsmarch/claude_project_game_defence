@@ -54,7 +54,7 @@ namespace LastLineDefense.Enemy
 
             GameEvents.EnemyKilled();
 
-            var currencyManager = FindFirstObjectByType<Game.CurrencyManager>();
+            var currencyManager = FindAnyObjectByType<Game.CurrencyManager>();
             if (currencyManager != null)
                 currencyManager.AddGold(rewardGold);
 
@@ -68,7 +68,7 @@ namespace LastLineDefense.Enemy
 
             GameEvents.EnemyReachedBase(baseDamage);
 
-            var waveManager = FindFirstObjectByType<Wave.WaveManager>();
+            var waveManager = FindAnyObjectByType<Wave.WaveManager>();
             if (waveManager != null)
                 waveManager.NotifyEnemyReachedBase();
 

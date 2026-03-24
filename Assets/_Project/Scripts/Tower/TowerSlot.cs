@@ -23,7 +23,7 @@ namespace LastLineDefense.Tower
         {
             if (isOccupied || towerPrefab == null) return;
 
-            var currency = FindFirstObjectByType<CurrencyManager>();
+            var currency = FindAnyObjectByType<CurrencyManager>();
             if (currency == null || !currency.CanSpend(buildCost)) return;
 
             currency.SpendGold(buildCost);

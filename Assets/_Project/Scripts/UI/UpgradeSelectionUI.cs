@@ -21,7 +21,7 @@ namespace LastLineDefense.UI
 
         private void Awake()
         {
-            upgradeManager = FindFirstObjectByType<WaveUpgradeManager>();
+            upgradeManager = FindAnyObjectByType<WaveUpgradeManager>();
 
             if (selectionPanel != null)
                 selectionPanel.SetActive(false);

@@ -1,5 +1,6 @@
 using UnityEngine;
 using LastLineDefense.Core;
+using LastLineDefense.Wave;
 
 namespace LastLineDefense.Game
 {
@@ -25,7 +26,7 @@ namespace LastLineDefense.Game
         {
             waveManager = GetComponentInChildren<WaveManager>();
             if (waveManager == null)
-                waveManager = FindFirstObjectByType<WaveManager>();
+                waveManager = FindAnyObjectByType<WaveManager>();
         }
 
         private void OnEnable()

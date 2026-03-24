@@ -27,8 +27,8 @@ namespace LastLineDefense.UI
 
         private void Awake()
         {
-            upgradeManager = FindFirstObjectByType<PermanentUpgradeManager>();
-            saveManager = FindFirstObjectByType<SaveManager>();
+            upgradeManager = FindAnyObjectByType<PermanentUpgradeManager>();
+            saveManager = FindAnyObjectByType<SaveManager>();
         }
 
         private void OnEnable()

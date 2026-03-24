@@ -14,7 +14,7 @@ namespace LastLineDefense.Game
 
         private void Awake()
         {
-            saveManager = FindFirstObjectByType<SaveManager>();
+            saveManager = FindAnyObjectByType<SaveManager>();
         }
 
         public bool CanClaimDaily()

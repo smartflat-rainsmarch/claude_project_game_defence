@@ -12,7 +12,7 @@ namespace LastLineDefense.Game
 
         private void Awake()
         {
-            saveManager = FindFirstObjectByType<SaveManager>();
+            saveManager = FindAnyObjectByType<SaveManager>();
         }
 
         public int GetLevel(int upgradeIndex)

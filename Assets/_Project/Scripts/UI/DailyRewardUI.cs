@@ -18,7 +18,7 @@ namespace LastLineDefense.UI
 
         private void Start()
         {
-            rewardManager = FindFirstObjectByType<DailyRewardManager>();
+            rewardManager = FindAnyObjectByType<DailyRewardManager>();
             RefreshUI();
 
             if (claimButton != null)
@@ -63,7 +63,7 @@ namespace LastLineDefense.UI
         {
             if (rewardManager == null) return;
 
-            var adServiceObj = FindFirstObjectByType<MonoBehaviour>();
+            var adServiceObj = FindAnyObjectByType<MonoBehaviour>();
             Ads.IAdService adService = null;
             foreach (var mb in FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None))
             {
@@ -76,7 +76,7 @@ namespace LastLineDefense.UI
                     int reward = rewardManager.ClaimDailyReward();
                     if (reward > 0)
                     {
-                        var saveManager = FindFirstObjectByType<Save.SaveManager>();
+                        var saveManager = FindAnyObjectByType<Save.SaveManager>();
                         if (saveManager != null)
                             saveManager.AddCoins(reward);
                         Debug.Log($"[DailyRewardUI] Claimed {reward * 2} coins (with ad bonus)");

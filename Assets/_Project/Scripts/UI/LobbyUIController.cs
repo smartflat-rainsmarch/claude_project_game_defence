@@ -23,7 +23,7 @@ namespace LastLineDefense.UI
 
         private void Start()
         {
-            var saveManager = FindFirstObjectByType<SaveManager>();
+            var saveManager = FindAnyObjectByType<SaveManager>();
             if (saveManager != null)
             {
                 var data = saveManager.GetSaveData();

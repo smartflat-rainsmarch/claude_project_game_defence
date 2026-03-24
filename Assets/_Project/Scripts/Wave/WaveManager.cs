@@ -25,11 +25,11 @@ namespace LastLineDefense.Wave
         {
             enemySpawner = GetComponentInChildren<EnemySpawner>();
             if (enemySpawner == null)
-                enemySpawner = FindFirstObjectByType<EnemySpawner>();
+                enemySpawner = FindAnyObjectByType<EnemySpawner>();
 
             stageManager = GetComponentInChildren<Game.StageManager>();
             if (stageManager == null)
-                stageManager = FindFirstObjectByType<Game.StageManager>();
+                stageManager = FindAnyObjectByType<Game.StageManager>();
         }
 
         private void OnEnable()
