@@ -225,6 +225,40 @@ namespace LastLineDefense.Editor
             tBtn4.GetComponent<Image>().color = new Color(0.7f, 0.2f, 0.9f);
 
             var towerSelUI = towerSelectPanel.AddComponent<TowerSelectionUI>();
+
+            // Wire tower prefabs to TowerSelectionUI
+            var basicPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/_Project/Prefabs/Towers/Tower_Basic.prefab");
+            var splashPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/_Project/Prefabs/Towers/Tower_Splash.prefab");
+            var slowPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/_Project/Prefabs/Towers/Tower_Slow.prefab");
+            var laserPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/_Project/Prefabs/Towers/Tower_Laser.prefab");
+
+            var towerOptionsField = typeof(TowerSelectionUI).GetField("towerOptions",
+                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            if (towerOptionsField != null)
+            {
+                var options = new TowerOption[]
+                {
+                    new TowerOption { displayName = "Basic", buildCost = 50, prefab = basicPrefab },
+                    new TowerOption { displayName = "Splash", buildCost = 80, prefab = splashPrefab },
+                    new TowerOption { displayName = "Slow", buildCost = 60, prefab = slowPrefab },
+                    new TowerOption { displayName = "Laser", buildCost = 120, prefab = laserPrefab }
+                };
+                towerOptionsField.SetValue(towerSelUI, options);
+            }
+
+            var towerButtonsField = typeof(TowerSelectionUI).GetField("towerButtons",
+                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            if (towerButtonsField != null)
+            {
+                towerButtonsField.SetValue(towerSelUI, new Button[]
+                {
+                    tBtn1.GetComponent<Button>(),
+                    tBtn2.GetComponent<Button>(),
+                    tBtn3.GetComponent<Button>(),
+                    tBtn4.GetComponent<Button>()
+                });
+            }
+
             towerSelectPanel.SetActive(false);
 
 
