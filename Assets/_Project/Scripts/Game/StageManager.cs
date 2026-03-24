@@ -1,12 +1,13 @@
 using UnityEngine;
 using LastLineDefense.Core;
+using LastLineDefense.Data;
 using LastLineDefense.Wave;
 
 namespace LastLineDefense.Game
 {
     public class StageManager : MonoBehaviour
     {
-        [Header("Stage Settings")]
+        [Header("Stage Settings (fallback if no StageData)")]
         [SerializeField] private int startingGold = 120;
         [SerializeField] private int startingBaseHp = 20;
         [SerializeField] private int totalWaves = 3;
@@ -17,6 +18,8 @@ namespace LastLineDefense.Game
         [SerializeField] private HealthBase healthBase;
 
         private WaveManager waveManager;
+        private StageDataLoader stageDataLoader;
+        private StageData currentStageData;
         private bool stageEnded;
 
         public int ClearReward => clearReward;
@@ -27,6 +30,8 @@ namespace LastLineDefense.Game
             waveManager = GetComponentInChildren<WaveManager>();
             if (waveManager == null)
                 waveManager = FindAnyObjectByType<WaveManager>();
+
+            stageDataLoader = FindAnyObjectByType<StageDataLoader>();
         }
 
         private void OnEnable()
@@ -43,7 +48,24 @@ namespace LastLineDefense.Game
 
         private void Start()
         {
+            LoadStageData();
             InitializeStage();
+        }
+
+        private void LoadStageData()
+        {
+            if (stageDataLoader != null)
+            {
+                currentStageData = stageDataLoader.GetCurrentStage();
+                if (currentStageData != null)
+                {
+                    startingGold = currentStageData.startingGold;
+                    startingBaseHp = currentStageData.baseHp;
+                    clearReward = currentStageData.clearReward;
+                    totalWaves = currentStageData.waves != null ? currentStageData.waves.Length : 3;
+                    Debug.Log($"[StageManager] Loaded StageData: Stage {currentStageData.stageIndex + 1}");
+                }
+            }
         }
 
         public void InitializeStage()

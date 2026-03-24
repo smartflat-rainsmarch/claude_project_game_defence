@@ -335,6 +335,15 @@ namespace LastLineDefense.Editor
             var pauseMenu = systems.AddComponent<PauseMenuUI>();
             var analytics = systems.AddComponent<AnalyticsIntegrator>();
 
+            // StageDataLoader with all 10 stages
+            var dataLoader = systems.AddComponent<StageDataLoader>();
+            var allStages = new StageData[10];
+            for (int i = 0; i < 10; i++)
+            {
+                allStages[i] = AssetDatabase.LoadAssetAtPath<StageData>($"Assets/_Project/ScriptableObjects/Balance/StageData_{i + 1:00}.asset");
+            }
+            SetPrivateField(dataLoader, "allStages", allStages);
+
             // Wire StageManager
             SetPrivateField(stageManager, "currencyManager", currencyMgr);
             SetPrivateField(stageManager, "healthBase", healthBase);
