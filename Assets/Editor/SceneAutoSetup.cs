@@ -149,6 +149,7 @@ namespace LastLineDefense.Editor
 
             // Camera
             var cam = CreateGameObject("Main Camera");
+            cam.transform.position = new Vector3(0, 0, -10);
             var camera = cam.AddComponent<Camera>();
             camera.orthographic = true;
             camera.orthographicSize = 6;
@@ -201,6 +202,31 @@ namespace LastLineDefense.Editor
             SetAnchor(lobbyBtn.GetComponent<RectTransform>(), 0.3f, 0.02f, 0.7f, 0.13f);
 
             resultPanel.SetActive(false);
+
+            // TowerSelectionPanel (inactive — shown on slot click)
+            var towerSelectPanel = CreateUIChild(canvas, "TowerSelectionPanel");
+            SetAnchor(towerSelectPanel.GetComponent<RectTransform>(), 0.05f, 0.02f, 0.95f, 0.15f);
+            towerSelectPanel.AddComponent<Image>().color = new Color(0, 0, 0, 0.7f);
+
+            var tBtn1 = CreateButton(towerSelectPanel, "TowerBtn_Basic", "Basic\n50G");
+            SetAnchor(tBtn1.GetComponent<RectTransform>(), 0.01f, 0.1f, 0.24f, 0.9f);
+            tBtn1.GetComponent<Image>().color = new Color(0.2f, 0.2f, 0.8f);
+
+            var tBtn2 = CreateButton(towerSelectPanel, "TowerBtn_Splash", "Splash\n80G");
+            SetAnchor(tBtn2.GetComponent<RectTransform>(), 0.26f, 0.1f, 0.49f, 0.9f);
+            tBtn2.GetComponent<Image>().color = new Color(1f, 0.5f, 0f);
+
+            var tBtn3 = CreateButton(towerSelectPanel, "TowerBtn_Slow", "Slow\n60G");
+            SetAnchor(tBtn3.GetComponent<RectTransform>(), 0.51f, 0.1f, 0.74f, 0.9f);
+            tBtn3.GetComponent<Image>().color = Color.cyan;
+
+            var tBtn4 = CreateButton(towerSelectPanel, "TowerBtn_Laser", "Laser\n120G");
+            SetAnchor(tBtn4.GetComponent<RectTransform>(), 0.76f, 0.1f, 0.99f, 0.9f);
+            tBtn4.GetComponent<Image>().color = new Color(0.7f, 0.2f, 0.9f);
+
+            var towerSelUI = towerSelectPanel.AddComponent<TowerSelectionUI>();
+            towerSelectPanel.SetActive(false);
+
 
             // TutorialPanel (inactive)
             var tutPanel = CreateUIChild(canvas, "TutorialPanel");

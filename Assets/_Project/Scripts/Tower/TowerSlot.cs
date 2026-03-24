@@ -1,5 +1,6 @@
 using UnityEngine;
 using LastLineDefense.Game;
+using LastLineDefense.UI;
 
 namespace LastLineDefense.Tower
 {
@@ -16,7 +17,17 @@ namespace LastLineDefense.Tower
 
         private void OnMouseDown()
         {
-            TryBuild();
+            if (isOccupied) return;
+
+            var towerUI = FindAnyObjectByType<TowerSelectionUI>();
+            if (towerUI != null)
+            {
+                towerUI.OnSlotSelected(this);
+            }
+            else
+            {
+                TryBuild();
+            }
         }
 
         public void TryBuild()
@@ -32,8 +43,6 @@ namespace LastLineDefense.Tower
 
             if (slotIndicator != null)
                 slotIndicator.enabled = false;
-
-            Debug.Log($"[TowerSlot] Tower built at {transform.position}, cost: {buildCost}");
         }
 
         public void SetTowerPrefab(GameObject prefab, int cost)

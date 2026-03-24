@@ -89,10 +89,7 @@ namespace LastLineDefense.Wave
 
             if (enemiesAliveInWave <= 0)
             {
-                waveInProgress = false;
-                currentWaveIndex++;
-                Debug.Log($"[WaveManager] Wave cleared. Next: {currentWaveIndex + 1}/{totalWaves}");
-                Invoke(nameof(StartNextWave), timeBetweenWaves);
+                OnWaveEnded();
             }
         }
 
@@ -103,10 +100,35 @@ namespace LastLineDefense.Wave
 
             if (enemiesAliveInWave <= 0)
             {
-                waveInProgress = false;
-                currentWaveIndex++;
+                OnWaveEnded();
+            }
+        }
+
+        private void OnWaveEnded()
+        {
+            waveInProgress = false;
+            currentWaveIndex++;
+            Debug.Log($"[WaveManager] Wave cleared. Next: {currentWaveIndex + 1}/{totalWaves}");
+
+            if (currentWaveIndex >= totalWaves)
+            {
+                StartNextWave();
+                return;
+            }
+
+            var upgradeUI = FindAnyObjectByType<UI.UpgradeSelectionUI>();
+            if (upgradeUI != null)
+            {
+                upgradeUI.ShowChoices(() =>
+                {
+                    Invoke(nameof(StartNextWave), timeBetweenWaves);
+                });
+            }
+            else
+            {
                 Invoke(nameof(StartNextWave), timeBetweenWaves);
             }
         }
     }
 }
+
