@@ -262,6 +262,29 @@ namespace LastLineDefense.Editor
             // DO NOT SetActive(false) — TowerSelectionUI.Awake() handles hiding
 
 
+            // UpgradeSelectionPanel (Awake hides it)
+            var upgradePanel = CreateUIChild(canvas, "UpgradeSelectionPanel");
+            SetAnchor(upgradePanel.GetComponent<RectTransform>(), 0.05f, 0.25f, 0.95f, 0.75f);
+            upgradePanel.AddComponent<Image>().color = new Color(0, 0, 0, 0.85f);
+
+            var upgTitle = CreateTMPText(upgradePanel, "UpgradeTitle", "Choose Upgrade", 28);
+            SetAnchor(upgTitle.GetComponent<RectTransform>(), 0, 0.8f, 1, 1);
+
+            var upgBtn1 = CreateButton(upgradePanel, "UpgradeBtn_1", "Upgrade 1");
+            SetAnchor(upgBtn1.GetComponent<RectTransform>(), 0.05f, 0.4f, 0.32f, 0.75f);
+            upgBtn1.GetComponent<Image>().color = new Color(0.2f, 0.6f, 0.2f);
+
+            var upgBtn2 = CreateButton(upgradePanel, "UpgradeBtn_2", "Upgrade 2");
+            SetAnchor(upgBtn2.GetComponent<RectTransform>(), 0.37f, 0.4f, 0.63f, 0.75f);
+            upgBtn2.GetComponent<Image>().color = new Color(0.2f, 0.6f, 0.2f);
+
+            var upgBtn3 = CreateButton(upgradePanel, "UpgradeBtn_3", "Upgrade 3");
+            SetAnchor(upgBtn3.GetComponent<RectTransform>(), 0.68f, 0.4f, 0.95f, 0.75f);
+            upgBtn3.GetComponent<Image>().color = new Color(0.2f, 0.6f, 0.2f);
+
+            var upgradeSelUI = upgradePanel.AddComponent<UpgradeSelectionUI>();
+            // DO NOT SetActive(false) — UpgradeSelectionUI.Awake() handles hiding
+
             // TutorialPanel (inactive)
             var tutPanel = CreateUIChild(canvas, "TutorialPanel");
             SetAnchor(tutPanel.GetComponent<RectTransform>(), 0.05f, 0.3f, 0.95f, 0.7f);

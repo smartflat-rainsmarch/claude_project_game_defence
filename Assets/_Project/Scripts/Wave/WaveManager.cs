@@ -116,7 +116,7 @@ namespace LastLineDefense.Wave
                 return;
             }
 
-            var upgradeUI = FindAnyObjectByType<UI.UpgradeSelectionUI>();
+            var upgradeUI = UI.UpgradeSelectionUI.Instance;
             if (upgradeUI != null)
             {
                 upgradeUI.ShowChoices(() =>

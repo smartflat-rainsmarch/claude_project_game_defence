@@ -16,6 +16,39 @@ namespace LastLineDefense.Game
 
         public List<UpgradeData> ActiveUpgrades => activeUpgrades;
 
+        private void Start()
+        {
+            if (allUpgrades == null || allUpgrades.Length == 0)
+                CreateDefaultUpgrades();
+        }
+
+        private void CreateDefaultUpgrades()
+        {
+            allUpgrades = new UpgradeData[10];
+            string[] names = { "ATK +15%", "Splash Range +20%", "Slow Duration +1s", "Laser DPS +20%",
+                "Start Gold +30", "Kill Gold +10%", "Base HP +1", "Crit +5%", "ATK Speed +10%", "Enemy Slow -5%" };
+            string[] descs = { "Basic tower damage up", "Splash area wider", "Slow lasts longer", "Laser hits harder",
+                "More starting gold", "More gold per kill", "Recover 1 base HP", "Chance for 2x damage", "All towers attack faster", "All enemies move slower" };
+            UpgradeEffectType[] types = {
+                UpgradeEffectType.BasicTowerDamage, UpgradeEffectType.SplashRange, UpgradeEffectType.SlowDuration,
+                UpgradeEffectType.LaserDps, UpgradeEffectType.StartingGold, UpgradeEffectType.KillGold,
+                UpgradeEffectType.BaseHpRecover, UpgradeEffectType.CriticalChance, UpgradeEffectType.AttackSpeed,
+                UpgradeEffectType.EnemySlowAll };
+            float[] values = { 15f, 20f, 1f, 20f, 30f, 10f, 1f, 5f, 10f, 5f };
+
+            for (int i = 0; i < 10; i++)
+            {
+                allUpgrades[i] = ScriptableObject.CreateInstance<UpgradeData>();
+                allUpgrades[i].upgradeId = $"upgrade_{i}";
+                allUpgrades[i].displayName = names[i];
+                allUpgrades[i].description = descs[i];
+                allUpgrades[i].effectType = types[i];
+                allUpgrades[i].effectValue = values[i];
+            }
+
+            Debug.Log("[WaveUpgrade] Created 10 default upgrades");
+        }
+
         public UpgradeData[] GetRandomChoices()
         {
             if (allUpgrades == null || allUpgrades.Length == 0)

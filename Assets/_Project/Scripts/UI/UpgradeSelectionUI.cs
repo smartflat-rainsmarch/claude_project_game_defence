@@ -8,8 +8,7 @@ namespace LastLineDefense.UI
 {
     public class UpgradeSelectionUI : MonoBehaviour
     {
-        [Header("Panel")]
-        [SerializeField] private GameObject selectionPanel;
+        public static UpgradeSelectionUI Instance { get; private set; }
 
         [Header("Choice Buttons")]
         [SerializeField] private Button[] choiceButtons;
@@ -21,15 +20,22 @@ namespace LastLineDefense.UI
 
         private void Awake()
         {
+            Instance = this;
+
+            if (choiceButtons == null || choiceButtons.Length == 0)
+                choiceButtons = GetComponentsInChildren<Button>(true);
+
             upgradeManager = FindAnyObjectByType<WaveUpgradeManager>();
 
-            if (selectionPanel != null)
-                selectionPanel.SetActive(false);
+            gameObject.SetActive(false);
         }
 
         public void ShowChoices(System.Action onComplete)
         {
             onSelectionComplete = onComplete;
+
+            if (upgradeManager == null)
+                upgradeManager = FindAnyObjectByType<WaveUpgradeManager>();
 
             if (upgradeManager == null)
             {
@@ -45,8 +51,15 @@ namespace LastLineDefense.UI
                 return;
             }
 
-            if (selectionPanel != null)
-                selectionPanel.SetActive(true);
+            gameObject.SetActive(true);
+
+            // Cache texts from buttons
+            if (choiceTexts == null || choiceTexts.Length == 0)
+            {
+                choiceTexts = new TMP_Text[choiceButtons.Length];
+                for (int i = 0; i < choiceButtons.Length; i++)
+                    choiceTexts[i] = choiceButtons[i].GetComponentInChildren<TMP_Text>();
+            }
 
             for (int i = 0; i < choiceButtons.Length; i++)
             {
@@ -76,9 +89,7 @@ namespace LastLineDefense.UI
             upgradeManager.ApplyUpgrade(currentChoices[index]);
 
             Time.timeScale = 1f;
-
-            if (selectionPanel != null)
-                selectionPanel.SetActive(false);
+            gameObject.SetActive(false);
 
             onSelectionComplete?.Invoke();
         }
