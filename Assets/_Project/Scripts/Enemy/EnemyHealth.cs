@@ -33,9 +33,14 @@ namespace LastLineDefense.Enemy
 
             currentHp = Mathf.Max(0, currentHp - damage);
 
+            Utils.DamagePopup.Create(transform.position, damage);
+
             if (currentHp <= 0)
             {
                 isDead = true;
+                var sr = GetComponent<SpriteRenderer>();
+                Color deathColor = sr != null ? sr.color : Color.red;
+                Utils.DeathEffect.Create(transform.position, deathColor);
                 OnDeath?.Invoke();
             }
         }

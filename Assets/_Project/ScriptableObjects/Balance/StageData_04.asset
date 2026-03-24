@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ae282a4aac49344fae665d3f0373acd, type: 3}
+  m_Name: StageData_04
+  m_EditorClassIdentifier: Assembly-CSharp::LastLineDefense.Data.StageData
+  stageIndex: 3
+  startingGold: 140
+  baseHp: 18
+  clearReward: 110
+  failReward: 33
+  waves:
+  - {fileID: 11400000, guid: dbfcda7f0b471e640b90b072b5d22865, type: 2}
+  - {fileID: 11400000, guid: a2da23384f440b644b2fa13bf9e7034d, type: 2}
+  - {fileID: 11400000, guid: c35ff56743bb3844a962a94c32f87ef0, type: 2}
+  - {fileID: 11400000, guid: dae22af261a5bb147950e24f3983a7cf, type: 2}
