@@ -35,7 +35,7 @@ namespace LastLineDefense.Tower
             EnemyController target = targeting.FindNearestEnemy();
             if (target == null) return;
 
-            var enemies = FindObjectsByType<EnemyController>(FindObjectsSortMode.None);
+            var enemies = FindObjectsByType<EnemyController>();
             foreach (var enemy in enemies)
             {
                 if (enemy == null) continue;

@@ -12,7 +12,7 @@ namespace LastLineDefense.Tower
 
         public EnemyController FindNearestEnemy()
         {
-            var enemies = FindObjectsByType<EnemyController>(FindObjectsSortMode.None);
+            var enemies = FindObjectsByType<EnemyController>();
             EnemyController nearest = null;
             float nearestDist = float.MaxValue;
 

@@ -65,7 +65,7 @@ namespace LastLineDefense.UI
 
             var adServiceObj = FindAnyObjectByType<MonoBehaviour>();
             Ads.IAdService adService = null;
-            foreach (var mb in FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None))
+            foreach (var mb in FindObjectsByType<MonoBehaviour>())
             {
                 if (mb is Ads.IAdService svc) { adService = svc; break; }
             }
