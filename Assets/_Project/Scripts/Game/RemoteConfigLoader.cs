@@ -4,8 +4,6 @@ namespace LastLineDefense.Game
 {
     public class RemoteConfigLoader : MonoBehaviour
     {
-        [SerializeField] private float fetchTimeoutSeconds = 10f;
-
         private void Start()
         {
             FetchRemoteConfig();
