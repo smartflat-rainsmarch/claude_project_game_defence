@@ -259,7 +259,7 @@ namespace LastLineDefense.Editor
                 });
             }
 
-            towerSelectPanel.SetActive(false);
+            // DO NOT SetActive(false) — TowerSelectionUI.Awake() handles hiding
 
 
             // TutorialPanel (inactive)
