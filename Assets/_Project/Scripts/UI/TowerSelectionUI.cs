@@ -16,6 +16,8 @@ namespace LastLineDefense.UI
 
     public class TowerSelectionUI : MonoBehaviour
     {
+        public static TowerSelectionUI Instance { get; private set; }
+
         [Header("Tower Options")]
         [SerializeField] private TowerOption[] towerOptions;
 
@@ -29,6 +31,7 @@ namespace LastLineDefense.UI
 
         private void Awake()
         {
+            Instance = this;
             if (towerButtons == null || towerButtons.Length == 0)
                 towerButtons = GetComponentsInChildren<Button>(true);
 

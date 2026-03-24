@@ -19,7 +19,7 @@ namespace LastLineDefense.Tower
         {
             if (isOccupied) return;
 
-            var towerUI = FindAnyObjectByType<TowerSelectionUI>();
+            var towerUI = TowerSelectionUI.Instance;
             if (towerUI != null)
             {
                 towerUI.OnSlotSelected(this);
